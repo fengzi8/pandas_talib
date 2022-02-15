@@ -10,13 +10,9 @@ import talib
 from pandas_talib import *
 
 basepath = os.path.dirname(__file__)
-filename = os.path.join(basepath, "..", "data", "AAPL_GOOGL_IBM_20140101_20141201.xls")
-d = pd.read_excel(filename, sheetname=None)
-panel = pd.Panel.from_dict(d)
-panel = panel.iloc[:, 1:, :]
-panel.major_axis.name = "Date"
-
-df = panel.loc[:, :, 'AAPL']
+filename = os.path.join(basepath, "..", "data", "AAPL_20140101_20141201.csv")
+# filename = os.path.join(basepath, ".", "data", "AAPL_GOOGL_IBM_20140101_20141201.xls")
+df = pd.read_csv(filename)
 
 SETTINGS.join = False
 
@@ -192,3 +188,5 @@ class TestFunctions(unittest.TestCase):
         n = 2
         result = STDDEV(df, n)
         isinstance(result, pd.DataFrame)
+if __name__ == '__main__':
+    unittest.main()
